@@ -1,0 +1,36 @@
+<div class="form-group">
+    <label for="name">Tên sách</label>
+    <input required type="text" class="form-control" id="name" name="name" value="<%= typeof book !== 'undefined' ? book.name : ''%> ">
+  </div>
+  <div class="form-group">
+    <label for="image">Link hình ảnh</label>
+    <input required type="text" class="form-control" id="image" name="image" value="<%= typeof book !== 'undefined' ? book.image : ''%> ">
+  </div>
+  <div class="form-group">
+    <label class="form-check-label" for="author">Tác giả</label>
+    <input required type="text" name="author" class="form-control" id="author" value="<%= typeof book !== 'undefined' ? book.author : ''%>">
+  </div>
+  <div class="form-group">
+    <label class="form-check-label" for="category_k">Thể loại</label>
+    <select required name="category_k" class="form-control" id="category_k">
+        <!-- Loop through categories to generate options -->
+        <% categories.forEach(category => { %>
+            <option value="<%= category._id %>" 
+                <% if (typeof book !== 'undefined' && book.category_k.equals(category._id)) { %> selected <% } %>>
+                <%= category.name %>
+            </option>
+        <% }) %>
+    </select>
+</div>
+  <div class="form-group">
+      <label for="content">Tóm tắt</label>
+      <textarea required name="content" class="form-control" id="content" rows="3"><%= typeof book !== 'undefined' ? book.content : ''%></textarea>
+    </div>
+
+  <div class="form-group">
+    <label class="form-check-label" for="price">Giá sách</label>
+    <input required type="number" name="price" class="form-control" id="price" value="<%= typeof book !== 'undefined' ? book.price : ''%>">
+</div>
+  <button type="submit" class="btn btn-success"><%= typeof book === 'undefined' ? 'Thêm sách' : 'Cập nhật'%></button>
+  <a href="<%= typeof book === 'undefined' ? '/books' : `/books/view/${book._id}`%>" class="btn btn-success">Quay lại</a>
+
