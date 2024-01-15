@@ -1,6 +1,4 @@
 var express = require('express');
-const { model } = require('mongoose');
-const { use } = require('.');
 var router = express.Router();
 var responseData = require('../helper/responseData');
 var modelUser = require('../models/user')
@@ -11,6 +9,8 @@ var jwt = require('jsonwebtoken');
 const configs = require('../helper/configs');
 const sendmail = require('../helper/sendmail');
 const { checkLogin } = require('../middlewares/protect');
+var UserDepartment = require('../schema/user');
+
 
 router.get('/register', async(req,res) =>{
   try{
@@ -65,27 +65,10 @@ router.post('/login', async function (req, res, next) {
     httpOnly:true
   });
   res.redirect('/books/');
-  // res.render('user/dashboard');
+    // res.redirect('/users/dashboard');
   // responseData.responseReturn(res, 200, true, token);
 });
 
-router.get('/user/dashboard',async function (req, res, next) {
-  console.log(req.user.role);
-  if (req.user.role !== 'admin') {
-    modelUser.findById(req.user.id)
-      .populate('carts.book')
-      .exec((err, user) => {
-        if (err) {
-          res.redirect('/books');
-        } else {
-          //  res.json(user);
-          res.render('user/dashboard', { user: user });
-        }
-      });
-  } else {
-    responseData.responseReturn(res, 404, false, "khong tim thay user");
-  }
-});
 router.get('/logout', async function(req, res, next){
   res.cookie('tokenJWT','none',{
     expires:new Date(Date.now()+1000),
@@ -103,23 +86,38 @@ router.get('/me', async function(req, res, next){
   }
   console.log(result);
   req.userID = result;
-  next();
-},
-// async function(req, res, next){
-//   var user = await modelUser.getOne(req.userID);
-//   var role = user.role;
-//   console.log(role);
-//   var DSRole = ['admin','publisher'];
-//   if(DSRole.includes(role)){
-//     next();
-//   }
-//   else{
-//     responseData.responseReturn(res, 403, true,"ban khong du quyen");
-//   }
-// },
- async function (req, res, next) {//get all
   var user = await modelUser.getOne(req.userID);
-  res.send({ "done": user});
+  res.render('account',{user: user});
+});
+
+router.put('/me', async function (req, res, next) {
+  var result = await checkLogin(req);
+  if(result.err){
+    responseData.responseReturn(res, 400, true, result.err);
+    return;
+  }
+  console.log(result);
+  req.userID = result;
+  var user1 = await modelUser.getOne(req.userID);
+  if(req.body.password !== user1.password){
+    const salt = bcrypt.genSaltSync(10);
+    req.body.password = bcrypt.hashSync(req.body.password, salt);
+   
+  }
+  const userUpdate = {
+    email: req.body.email,
+    userName: req.body.userName,
+    password: req.body.password,
+  };
+ 
+  try{
+    const updateUser = await UserDepartment.findByIdAndUpdate(req.userID, userUpdate);
+    await updateUser.save();
+    var user = await modelUser.getOne(req.userID);
+    res.render('account', {user: user});
+  }catch(e){
+    responseData.responseReturn(res, 403, true,"thất bại");
+  }
 });
 
 router.post('/forgetPassword', async function(req, res, next){

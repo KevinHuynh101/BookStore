@@ -139,16 +139,16 @@ router.put('/edit/:id', async function (req, res, next) {
     content: req.body.content,
     price:  parseFloat(req.body.price),
     category_k:req.body.category_k
-};
-try{
+  };
+  try{
     const updatedBook = await BookDepartment.findByIdAndUpdate(req.params.id, book);
     await updatedBook.save();
     res.redirect(`/books/view/${updatedBook._id}`);
     // res.redirect('/books/');
-}catch(e){
+  }catch(e){
     console.log(e);
     res.render('books/new', {book: book});
-}
+  }
 });
 
 router.delete('/delete/:id',async function (req, res, next) {//delete by Id

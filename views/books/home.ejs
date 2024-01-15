@@ -10,6 +10,7 @@
       <% } else{%>
           <span class="lead mr-2 capital user-name-home"><%= user.userName  %> </span>
           <a href="/users/dashboard" class="btn btn-sm btn-success d-inline">Go to Dashboard</a>
+          <a href="/authen/me" class="btn btn-sm btn-success d-inline">Tài khoản</a>
       <% } %>
       <% if(typeof user !== 'undefined' && user.role === 'admin'){ %>    
         <a href="/books/add" class="btn btn-sm btn-primary">Add a New Book</a>
