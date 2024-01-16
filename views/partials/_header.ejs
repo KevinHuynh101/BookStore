@@ -38,6 +38,7 @@
             <div class="dropdown-content">
             <a href="/authen/me">Tài khoản</a>
             <% if(typeof user !== 'undefined' && user.role === 'admin'){ %> 
+                <a href="/users/">Tài khoản người dùng</a>
                 <a href="/authen/logout">Đăng xuất</a>
             <% }else { %> 
                 <a href="/users/cart">Giỏ hàng</a>

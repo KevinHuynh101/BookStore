@@ -22,11 +22,7 @@ const schema = new mongoose.Schema({
             default: 1
         }
     }]
-//     carts:[{    
-//         type: mongoose.Schema.Types.ObjectId,
-//         ref: "book",
-    
-// }]
+
 
 });
 

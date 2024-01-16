@@ -9,7 +9,18 @@ const { checkLogin } = require('../middlewares/protect');
 const {validationResult} = require('express-validator');
 var BookDepartment = require('../schema/book');
 
-
+router.get('/', async function (req, res, next) {
+  var result = await checkLogin(req);
+      if (result.err) {
+          responseData.responseReturn(res, 400, true, result.err);
+          return;
+      }
+  req.userID = result;
+  var user = await modelUser.getOne(req.userID);
+  console.log(req.query);
+  var usersAll = await modelUser.getall(req.query);
+  res.render('admin/accounts',{ users: usersAll  });
+});
 
 router.get('/cart',async function (req, res, next) {
   try {

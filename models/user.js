@@ -17,7 +17,7 @@ module.exports = {
         var limit = parseInt(query.limit) || 10;
         var page = parseInt(query.page) || 1;
         var skip = (page - 1) * limit;
-        return SchemaUser.find(Search).select('userName password carts role').sort(sort).limit(limit).skip(skip).exec();
+        return SchemaUser.find(Search).select('email userName password carts role').sort(sort).limit(limit).skip(skip).exec();
     },
     getCartByUserId: function (Id, query) {
         var sort = {};
