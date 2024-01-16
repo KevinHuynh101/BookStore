@@ -65,7 +65,6 @@ router.post('/login', async function (req, res, next) {
     httpOnly:true
   });
   res.redirect('/books/');
-    // res.redirect('/users/dashboard');
   // responseData.responseReturn(res, 200, true, token);
 });
 
@@ -89,6 +88,7 @@ router.get('/me', async function(req, res, next){
   req.userID = result;
   var user = await modelUser.getOne(req.userID);
   res.render('account',{user: user});
+  // responseData.responseReturn(res, 200, true, user);
 });
 
 router.put('/me', async function (req, res, next) {
@@ -116,6 +116,7 @@ router.put('/me', async function (req, res, next) {
     await updateUser.save();
     var user = await modelUser.getOne(req.userID);
     res.render('account', {user: user});
+    // responseData.responseReturn(res, 200, true, user);
   }catch(e){
     responseData.responseReturn(res, 403, true,"thất bại");
   }

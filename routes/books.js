@@ -35,7 +35,7 @@ router.get('/view/:id', async function (req, res, next) {
   var user = await modelUser.getOne(req.userID);
   var Bookdetail = await modelBook.getOne(req.params.id).populate('category_k', 'name') ;
   res.render('books/view',{ book: Bookdetail, user: user });
-
+  // responseData.responseReturn(res, 200, true, Bookdetail);
 });
 
 router.get('/add', async(req,res) =>{
@@ -145,6 +145,8 @@ router.put('/edit/:id', async function (req, res, next) {
     await updatedBook.save();
     res.redirect(`/books/view/${updatedBook._id}`);
     // res.redirect('/books/');
+    // responseData.responseReturn(res, 200, true, updatedBook);
+
   }catch(e){
     console.log(e);
     res.render('books/new', {book: book});

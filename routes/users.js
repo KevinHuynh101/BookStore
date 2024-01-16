@@ -20,6 +20,8 @@ router.get('/', async function (req, res, next) {
   console.log(req.query);
   var usersAll = await modelUser.getall(req.query);
   res.render('admin/accounts',{ users: usersAll , user: user });
+  // responseData.responseReturn(res, 200, true,usersAll );
+
 });
 
 router.delete('/delete/:id',async function (req, res, next) {//delete by Id
@@ -64,7 +66,7 @@ router.get('/cart',async function (req, res, next) {
       if(DSRole.includes(role)){
         var userWithCart  = await modelUser.getCartByUserId(req.userID,req.query);
         res.render('users/cart',{ user: userWithCart  });
-     
+        // responseData.responseReturn(res, 200, true, userWithCart);
 
   } else {
     responseData.responseReturn(res, 403, true,"ban khong du quyen");
@@ -98,6 +100,7 @@ router.put('/cart/:id', async (req, res) => {
       await user.save();
       // Chuyển hướng sau khi cập nhật giỏ hàng
       res.redirect('/books/');
+      // responseData.responseReturn(res, 200, true, "them vao gio hang thanh cong");
   } catch (e) {
     responseData.responseReturn(res, 401, false, "khong tim thay");
   }
@@ -126,6 +129,7 @@ router.delete('/cart/:id/delete', async (req, res) => {
           // Lưu cập nhật vào cơ sở dữ liệu
           await user.save();
           res.redirect('/users/cart');
+          // responseData.responseReturn(res, 200, true, "xoa thành công");
       } else {
           responseData.responseReturn(res, 404, false, "Sách không tồn tại trong giỏ hàng");
       }
