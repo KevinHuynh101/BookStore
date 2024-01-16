@@ -41,13 +41,29 @@ module.exports = {
 
         return SchemaUser.findById(Id)
             .select('userName password carts role') // Select fields you want
-            .populate('carts.book','name image price author')
-            // select('userName password carts role') // Select fields you want
-            // .populate('carts', 'name')
+            // .populate('carts.book','name image price author')
+            // // select('userName password carts role') // Select fields you want
+            // // .populate('carts', 'name')
+            // .sort(sort)
+            // .limit(limit)
+            // .skip(skip)
+            // .exec();
+            .populate({
+                path: 'carts.book',
+                select: 'name image price author' // Chọn các trường từ sách
+            })
             .sort(sort)
             .limit(limit)
             .skip(skip)
-            .exec();
+            .lean() // Thêm lean để trả về đối tượng JavaScript thay vì đối tượng Mongoose
+            .exec()
+            .then(user => {
+                // Lặp qua giỏ hàng và thêm giá trị quantity từ subdocument vào sách
+                user.carts.forEach(cartItem => {
+                    cartItem.book.quantity = cartItem.quantity;
+                });
+                return user;
+            });
     },
     getOne: function (id) {
         return SchemaUser.findById(id);

@@ -44,7 +44,10 @@
                         <button type="submit" class="btn btn-warning">Thêm giỏ hàng</button>
                     </form>
                 <% }else{ %>
-                    <p class="lead text-secondary">Item in Your Cart <a href="/users/dashboard" class="btn btn-primary d-inline">Go to Cart</a></p>
+                    <p class="lead text-secondary">Sản phẩm đã có trong giỏ hàng <a href="/users/cart" class="btn btn-primary d-inline">Giỏ hàng</a></p>
+                    <form action="/users/cart/<%= book._id  %>?_method=PUT" class="d-inline" method="POST">
+                        <button type="submit" class="btn btn-warning">Thêm giỏ hàng</button>
+                    </form>
                 <% } %>  
                 </div>
             </div>

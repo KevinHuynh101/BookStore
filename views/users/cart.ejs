@@ -34,6 +34,7 @@
                                     <td><img src="<%= cartItem.book.image  %>" alt="Book Cover" class="img-thumbnail" style="height: 8rem; width: 8rem;"></td>
                                     <td class="lead text-primary"><%= cartItem.name  %> </td>
                                     <td class="lead text-danger"><%= cartItem.book.price  %> </td>
+                                    <td class="lead text-danger"><%= cartItem.book.quantity  %> </td>
                                     <td>
                                         <form action="/users/cart/<%= cartItem.book._id  %>/delete?_method=DELETE" class="d-inline" method="POST">
                                             <button type="submit" class="btn btn-sm btn-danger">Remove</button>
