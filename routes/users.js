@@ -19,8 +19,35 @@ router.get('/', async function (req, res, next) {
   var user = await modelUser.getOne(req.userID);
   console.log(req.query);
   var usersAll = await modelUser.getall(req.query);
-  res.render('admin/accounts',{ users: usersAll  });
+  res.render('admin/accounts',{ users: usersAll , user: user });
 });
+
+router.delete('/delete/:id',async function (req, res, next) {//delete by Id
+  try {
+    var result = await checkLogin(req);
+      if(result.err){
+        responseData.responseReturn(res, 400, true, result.err);
+        return;
+      }
+      console.log(result);
+      req.userID = result;
+      var user = await modelUser.getOne(req.userID);
+      var role = user.role;
+      // console.log(role);
+      var DSRole = ['admin','publisher'];
+      if(DSRole.includes(role)){
+        var user = await userDepartment.findByIdAndDelete(req.params.id);
+        // responseData.responseReturn(res, 200, true, "xoa thanh cong");
+        res.redirect('/users/');
+      }else{
+            responseData.responseReturn(res, 403, true,"ban khong du quyen");
+      }
+
+  } catch (error) {
+    responseData.responseReturn(res, 404, false, "khong tim thay user");
+  }
+});
+
 
 router.get('/cart',async function (req, res, next) {
   try {
