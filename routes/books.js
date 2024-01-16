@@ -177,5 +177,38 @@ router.delete('/delete/:id',async function (req, res, next) {//delete by Id
   }
 });
 
+// router.get('/cart',async function (req, res, next) {
+
+//   var result = await checkLogin(req);
+//       if(result.err){
+//         responseData.responseReturn(res, 400, true, result.err);
+//         return;
+//       }
+//       console.log(result);
+//       req.userID = result;
+//       var user = await modelUser.getOne(req.userID);
+
+//       var role = user.role;
+//       var DSRole = ['user'];
+//       if(DSRole.includes(role)){
+//         var user = await modelUser.getCartByUserId(req.userID,req.query);
+//         res.render('users/cart', { user: user });
+//       // UserDepartment.findById(req.userID)
+//       // .populate('carts.book')
+//       // .exec((err, user) => {
+//       //   if (err) {
+//       //     res.redirect('/books/');
+//       //   } else {
+//       //      res.json(user);
+//       //     res.render('users/cart', { user: user });
+//       //   }
+//       // })
+
+//   } else {
+//     responseData.responseReturn(res, 403, true,"ban khong du quyen");
+//   }
+
+
+// });
 
 module.exports = router;

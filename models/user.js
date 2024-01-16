@@ -14,10 +14,40 @@ module.exports = {
         if (query.key) {
             Search.userName = new RegExp(query.key, 'i');
         }
-        var limit = parseInt(query.limit) || 2;
+        var limit = parseInt(query.limit) || 10;
         var page = parseInt(query.page) || 1;
         var skip = (page - 1) * limit;
         return SchemaUser.find(Search).select('userName password carts role').sort(sort).limit(limit).skip(skip).exec();
+    },
+    getCartByUserId: function (Id, query) {
+        var sort = {};
+        var Search = {};
+
+        if (query.sort) {
+            if (query.sort[0] === '-') {
+                sort[query.sort.substring(1)] = 'desc';
+            } else {
+                sort[query.sort] = 'asc';
+            }
+        }
+
+        if (query.key) {
+            Search.userName = new RegExp(query.key, 'i');
+        }
+
+        var limit = parseInt(query.limit) || 2;
+        var page = parseInt(query.page) || 1;
+        var skip = (page - 1) * limit;
+
+        return SchemaUser.findById(Id)
+            .select('userName password carts role') // Select fields you want
+            .populate('carts.book','name image price author')
+            // select('userName password carts role') // Select fields you want
+            // .populate('carts', 'name')
+            .sort(sort)
+            .limit(limit)
+            .skip(skip)
+            .exec();
     },
     getOne: function (id) {
         return SchemaUser.findById(id);

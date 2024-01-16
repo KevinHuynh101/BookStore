@@ -1,6 +1,6 @@
 module.exports= {
     SECRET_KEY:"heheheehe",
-    EXP: '3h',
+    EXP: '10h',
     cookieExp: 20,
     MAIL_HOST:'sandbox.smtp.mailtrap.io',
     MAIL_PORT:2525,

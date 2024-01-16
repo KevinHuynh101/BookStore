@@ -9,7 +9,7 @@
           <a href="/users/login" class="btn btn-sm btn-success">Login</a>
       <% } else{%>
           <span class="lead mr-2 capital user-name-home"><%= user.userName  %> </span>
-          <a href="/users/dashboard" class="btn btn-sm btn-success d-inline">Go to Dashboard</a>
+          <a href="/users/cart" class="btn btn-sm btn-success d-inline">Go to Dashboard</a>
           <a href="/authen/me" class="btn btn-sm btn-success d-inline">Tài khoản</a>
       <% } %>
       <% if(typeof user !== 'undefined' && user.role === 'admin'){ %>    

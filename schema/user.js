@@ -22,6 +22,11 @@ const schema = new mongoose.Schema({
             default: 1
         }
     }]
+//     carts:[{    
+//         type: mongoose.Schema.Types.ObjectId,
+//         ref: "book",
+    
+// }]
 
 });
 
@@ -73,5 +78,5 @@ schema.statics.findUser = async ( token ) => {
     }
 }
 
-module.exports = mongoose.model('user', schema);;
+module.exports = mongoose.model('user', schema);
 

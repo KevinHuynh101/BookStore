@@ -1,0 +1,50 @@
+<%- include ('../partials/_header.ejs') %>
+<nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 lead">
+        <img src="https://cdn3.iconfinder.com/data/icons/book-shop-category-ouline/512/Book_Shop_Category-10-512.png" alt="" style="height: 2.5em; width: 2.5em;" class="img-thumbnail rounded-circle">
+        Book Store</span>
+    <span>
+        <a href="/books/" class="btn btn-sm btn-success">Đi đến Store</a>
+        <a href="/users/orders" class="btn btn-sm btn-info">Giỏ hàng</a>
+          <a href="/authen/logout" class="btn btn-sm btn-warning">Đăng xuất</a>  
+    </span>
+  </nav>
+  <div class="container">
+      <div class="jumbotron my-2">
+            <div class="container container-fluid text-center">
+              <h1 class="display-4">Giỏ hàng </strong></h1>
+
+            </div>
+        </div>
+        <div class="jumbotron p-3">
+            
+            <div class="container mt-2">
+                <table class="table table-bordered bg-light table-responsive-sm">
+                    <thead>
+                      <tr>
+                        <th scope="col">Cover</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% user.carts.forEach(cartItem=>{ %>
+                                <tr>
+                                    <td><img src="<%= cartItem.book.image  %>" alt="Book Cover" class="img-thumbnail" style="height: 8rem; width: 8rem;"></td>
+                                    <td class="lead text-primary"><%= cartItem.name  %> </td>
+                                    <td class="lead text-danger"><%= cartItem.book.price  %> </td>
+                                    <td>
+                                        <form action="/users/cart/<%= cartItem.book._id  %>/delete?_method=DELETE" class="d-inline" method="POST">
+                                            <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                        <% }) %>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+  </div>
+
+  <%- include ('../partials/_footer.ejs') %>

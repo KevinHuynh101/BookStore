@@ -1,5 +1,5 @@
 function responseReturn(res,status,sucess,data){
-    res.send(status, {
+    res.status(status).send( {
         sucess: sucess,
         data: data
       });
