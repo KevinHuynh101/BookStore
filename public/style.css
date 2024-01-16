@@ -11,8 +11,8 @@
     text-transform: capitalize;
 }
 .user-name-home{
-    font-weight: 600; 
-    color: blue;
+    font-weight: 100; 
+    color: black;
 }
 .view-back-btn{
     right:1em ;
