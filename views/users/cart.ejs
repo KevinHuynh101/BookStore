@@ -22,17 +22,18 @@
                 <table class="table table-bordered bg-light table-responsive-sm">
                     <thead>
                       <tr>
-                        <th scope="col">Cover</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Hình ảnh</th>
+                        <th scope="col">Tên sách</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Hành động</th>
                       </tr>
                     </thead>
                     <tbody>
                         <% user.carts.forEach(cartItem=>{ %>
                                 <tr>
                                     <td><img src="<%= cartItem.book.image  %>" alt="Book Cover" class="img-thumbnail" style="height: 8rem; width: 8rem;"></td>
-                                    <td class="lead text-primary"><%= cartItem.name  %> </td>
+                                    <td class="lead text-primary"><%= cartItem.book.name  %> </td>
                                     <td class="lead text-danger"><%= cartItem.book.price  %> </td>
                                     <td class="lead text-danger"><%= cartItem.book.quantity  %> </td>
                                     <td>

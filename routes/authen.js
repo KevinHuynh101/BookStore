@@ -74,7 +74,8 @@ router.get('/logout', async function(req, res, next){
     expires:new Date(Date.now()+1000),
     httpOnly:true
   });
-  responseData.responseReturn(res, 200, true, 'logout thanh cong');
+  // responseData.responseReturn(res, 200, true, 'logout thanh cong');
+  res.render('login');
 })
 
 
