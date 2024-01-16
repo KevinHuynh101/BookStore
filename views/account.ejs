@@ -5,9 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Store App</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 lead">
+          <img src="https://cdn3.iconfinder.com/data/icons/book-shop-category-ouline/512/Book_Shop_Category-10-512.png" alt="" style="height: 2.5em; width: 2.5em;" class="img-thumbnail rounded-circle">
+          Book Store
+        </span>
+        <ul>
+          <li><a  href="/books/">Trang chủ</a></li>
+          <li><a href="/books/">Sách</a></li>
+          <li><a href="#">Liên hệ</a></li>
+          <li><a href="#">Thông tin</a></li>
+        </ul>
+        <% if(typeof user === 'undefined'){ %>
+            <a href="/users/login" class="btn btn-sm btn-success">Login</a>
+        <% } else{%>
+        <div class="dropdown" style="float:right;">
+            <button class="dropbtn"><%= user.userName  %></button>
+            <div class="dropdown-content">
+            <a href="/authen/me">Tài khoản</a>            
+            <% if(typeof user !== 'undefined' && user.role === 'admin'){ %> 
+                <a href="/authen/logout">Đăng xuất</a>
+            <% }else { %> 
+                <a href="/users/cart">Giỏ hàng</a>
+                <a href="/authen/logout">Đăng xuất</a>
+            <% } %>
+            </div>
+        </div>
+        <% } %>
+
+    </nav>
     <div class="jumbotron jumbotron-fluid">
         <div class="display-4 text-center">Cập nhật tài khoản </div>
         <div class="container">
