@@ -36,33 +36,7 @@ router.get('/cart',async function (req, res, next) {
 }  
 });
 
-// router.put('/cart/:id',  async (req, res) => {
-//   try {
-//     var result = await checkLogin(req);
-//     if(result.err){
-//       responseData.responseReturn(res, 400, true, result.err);
-//       return;
-//     }
-//     console.log(result);
-//     req.userID = result;
-//     var user = await modelUser.getOne(req.userID);
-//     var book = await BookDepartment.findById(req.params.id);
-//     // const user = req.user;
-//     user.carts.push({ book });
-//     userDepartment.findByIdAndUpdate(req.userID, user, (err, savedUser) => {
-//       if (err) {
-//         console.log(err);
-//         res.redirect('back');
-//       } else {
-//         // res.redirect('/users/dashboard');
-//         res.redirect('/books/');
-//       }
-//     });
-//   } catch (e) {
-//     console.log(e);
-//     res.redirect('back');
-//   }
-// });
+
 router.put('/cart/:id', async (req, res) => {
   try {
       var result = await checkLogin(req);
@@ -70,14 +44,11 @@ router.put('/cart/:id', async (req, res) => {
           responseData.responseReturn(res, 400, true, result.err);
           return;
       }
-
       req.userID = result;
       var user = await modelUser.getOne(req.userID);
       var book = await BookDepartment.findById(req.params.id);
-
       // Kiểm tra xem sách đã tồn tại trong giỏ hàng chưa
       var existingCartItem = user.carts.find(cartItem => cartItem.book.equals(book._id));
-
       if (existingCartItem) {
           // Nếu sách đã tồn tại trong giỏ hàng, tăng số lượng
           existingCartItem.quantity++;
@@ -85,15 +56,68 @@ router.put('/cart/:id', async (req, res) => {
           // Nếu sách chưa có trong giỏ hàng, thêm vào giỏ hàng với số lượng là 1
           user.carts.push({ book });
       }
-
       // Lưu cập nhật vào cơ sở dữ liệu
       await user.save();
-
       // Chuyển hướng sau khi cập nhật giỏ hàng
       res.redirect('/books/');
   } catch (e) {
-      console.log(e);
-      res.redirect('back');
+    responseData.responseReturn(res, 401, false, "khong tim thay");
+  }
+});
+
+// router.delete('/cart/:id/delete', async (req, res) => {
+//   try {
+//     var result = await checkLogin(req);
+//     if (result.err) {
+//         responseData.responseReturn(res, 400, true, result.err);
+//         return;
+//     }
+//     req.userID = result;
+//     var user = await modelUser.getOne(req.userID);
+
+//     // const user = await userDepartment.findById(req.user.id);
+//     const index = user.carts.findIndex((book) => book.equals(req.params.id));
+//     user.carts.splice(index, 1);
+//     userDepartment.findByIdAndUpdate(user.id, user, (err, savedUser) => {
+//       if (err) {
+//         console.log(err);
+//         res.redirect('back');
+//       } else {
+//         res.redirect('/users/cart');
+//       }
+//     });
+//   } catch (e) {
+//     responseData.responseReturn(res, 401, false, "khong tim thay");
+//   }
+// });
+
+router.delete('/cart/:id/delete', async (req, res) => {
+  try {
+      var result = await checkLogin(req);
+
+      if (result.err) {
+          responseData.responseReturn(res, 400, true, result.err);
+          return;
+      }
+
+      req.userID = result;
+      var user = await modelUser.getOne(req.userID);
+
+      // Tìm vị trí của sách cần xóa trong giỏ hàng
+      const index = user.carts.findIndex(cartItem => cartItem.book.equals(req.params.id));
+
+      if (index !== -1) {
+          // Nếu sách tồn tại trong giỏ hàng, xóa nó
+          user.carts.splice(index, 1);
+
+          // Lưu cập nhật vào cơ sở dữ liệu
+          await user.save();
+          res.redirect('/users/cart');
+      } else {
+          responseData.responseReturn(res, 404, false, "Sách không tồn tại trong giỏ hàng");
+      }
+  } catch (e) {
+      responseData.responseReturn(res, 401, true, "Lỗi nội server");
   }
 });
 
