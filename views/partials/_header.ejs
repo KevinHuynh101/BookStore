@@ -20,12 +20,20 @@
           <li><a href="/books/">Sách</a></li>
           <li><a href="#">Liên hệ</a></li>
           <li><a href="#">Thông tin</a></li>
+           
         </ul>
+        
     <!-- <span> -->
         <% if(typeof user === 'undefined'){ %>
             <a href="/users/login" class="btn btn-sm btn-success">Login</a>
         <% } else{%>
+            
         <div class="dropdown" style="float:right;">
+            <form action="/books/search" method="POST">
+                <label for="query"></label>
+                <input type="text" id="query" name="query" placeholder="Tên sách hoặc tác giả"required>
+                <button type="submit">Tìm kiếm</button>
+            </form>
             <button class="dropbtn"><%= user.userName  %></button>
             <div class="dropdown-content">
             <a href="/authen/me">Tài khoản</a>
@@ -35,11 +43,11 @@
                 <a href="/users/cart">Giỏ hàng</a>
                 <a href="/authen/logout">Đăng xuất</a>
             <% } %>
-
+            
             </div>
         </div>
         <% } %>
     <!-- </span> -->
-
     </nav>
+    
     

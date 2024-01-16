@@ -176,39 +176,32 @@ router.delete('/delete/:id',async function (req, res, next) {//delete by Id
     responseData.responseReturn(res, 404, false, "khong tim thay user");
   }
 });
+router.post('/search', async (req, res) => {
+  try {
+    var result = await checkLogin(req);
+      if(result.err){
+        responseData.responseReturn(res, 400, true, result.err);
+        return;
+      }
+      console.log(result);
+      req.userID = result;
+      var user = await modelUser.getOne(req.userID);
 
-// router.get('/cart',async function (req, res, next) {
+      const query = req.body.query; // Lấy thông tin từ form tìm kiếm
 
-//   var result = await checkLogin(req);
-//       if(result.err){
-//         responseData.responseReturn(res, 400, true, result.err);
-//         return;
-//       }
-//       console.log(result);
-//       req.userID = result;
-//       var user = await modelUser.getOne(req.userID);
+      // Tìm kiếm sách theo tên hoặc tác giả
+      const books = await BookDepartment.find({
+          $or: [
+              { name: { $regex: query, $options: 'i' } }, // Tìm kiếm theo tên (không phân biệt chữ hoa chữ thường)
+              { author: { $regex: query, $options: 'i' } } // Tìm kiếm theo tác giả (không phân biệt chữ hoa chữ thường)
+          ]
+      });
 
-//       var role = user.role;
-//       var DSRole = ['user'];
-//       if(DSRole.includes(role)){
-//         var user = await modelUser.getCartByUserId(req.userID,req.query);
-//         res.render('users/cart', { user: user });
-//       // UserDepartment.findById(req.userID)
-//       // .populate('carts.book')
-//       // .exec((err, user) => {
-//       //   if (err) {
-//       //     res.redirect('/books/');
-//       //   } else {
-//       //      res.json(user);
-//       //     res.render('users/cart', { user: user });
-//       //   }
-//       // })
-
-//   } else {
-//     responseData.responseReturn(res, 403, true,"ban khong du quyen");
-//   }
-
-
-// });
+      res.render('books/home', { books :books, user:user });
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+  }
+});
 
 module.exports = router;

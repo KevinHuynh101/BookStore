@@ -65,31 +65,6 @@ router.put('/cart/:id', async (req, res) => {
   }
 });
 
-// router.delete('/cart/:id/delete', async (req, res) => {
-//   try {
-//     var result = await checkLogin(req);
-//     if (result.err) {
-//         responseData.responseReturn(res, 400, true, result.err);
-//         return;
-//     }
-//     req.userID = result;
-//     var user = await modelUser.getOne(req.userID);
-
-//     // const user = await userDepartment.findById(req.user.id);
-//     const index = user.carts.findIndex((book) => book.equals(req.params.id));
-//     user.carts.splice(index, 1);
-//     userDepartment.findByIdAndUpdate(user.id, user, (err, savedUser) => {
-//       if (err) {
-//         console.log(err);
-//         res.redirect('back');
-//       } else {
-//         res.redirect('/users/cart');
-//       }
-//     });
-//   } catch (e) {
-//     responseData.responseReturn(res, 401, false, "khong tim thay");
-//   }
-// });
 
 router.delete('/cart/:id/delete', async (req, res) => {
   try {
