@@ -1,0 +1,24 @@
+[{
+  "_id": {
+    "$oid": "65a3a7859c8f641f7128b41c"
+  },
+  "name": "văn học",
+  "isdelete": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65a3a7909c8f641f7128b41f"
+  },
+  "name": "âm nhạc",
+  "isdelete": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65a3a7ae9c8f641f7128b422"
+  },
+  "name": "ngoại ngữ",
+  "isdelete": false,
+  "__v": 0
+}]

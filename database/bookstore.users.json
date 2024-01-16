@@ -1,0 +1,104 @@
+[{
+  "_id": {
+    "$oid": "65a396ea3ee7dbbbdfbaacf8"
+  },
+  "email": "kimdong3@mail.com",
+  "userName": "kimdong1",
+  "password": "$2b$10$YAcdPylK6s2GGGW6qctq5OvKZrlnUQ5ovXiZzGo4/QpYCwH0n5cwG",
+  "role": "admin",
+  "__v": 1,
+  "carts": []
+},
+{
+  "_id": {
+    "$oid": "65a396fdcb3780de310ea089"
+  },
+  "email": "kimdong311@mail.com",
+  "userName": "kimdong3",
+  "password": "$2b$10$Ckocw8pnPpWw5iJEpOlID.hUQPEZy9WHjVwtKop5I8t2xnUJbMhum",
+  "role": "user",
+  "__v": 11,
+  "carts": [
+    {
+      "book": {
+        "$oid": "65a3aece9cd9b6e5b03a9adb"
+      },
+      "quantity": 2,
+      "_id": {
+        "$oid": "65a67d8cfe688cb3255b5bd3"
+      }
+    },
+    {
+      "book": {
+        "$oid": "65a54e195e7bbbfefe5254b4"
+      },
+      "quantity": 1,
+      "_id": {
+        "$oid": "65a67d90fe688cb3255b5bec"
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "65a3dd70a4fc95be2d32c294"
+  },
+  "email": "kimdong5@mail.com",
+  "userName": "kimdong5",
+  "password": "$2b$10$RrMa2NWAYt19mIHbrlX6dutH5/ATo0ByKl/fAmt/0qZuJSDdWL8RK",
+  "role": "user",
+  "__v": 1,
+  "carts": [
+    {
+      "book": {
+        "$oid": "65a54e195e7bbbfefe5254b4"
+      },
+      "quantity": 1,
+      "_id": {
+        "$oid": "65a61fe6277d5cf3e679dad7"
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "65a3de7f1417bc0dd1ee0ffe"
+  },
+  "email": "kimdong10@mail.com",
+  "userName": "kimdong10",
+  "password": "$2b$10$9E7oiXHgFnNeuvCZk6VmnOivNZhvyPHhFBgtqdRQJ2NASoUIDJ..G",
+  "role": "admin",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65a68bd503b48121286fa1aa"
+  },
+  "email": "kimdong6@gmail.com",
+  "userName": "kimdong6",
+  "password": "$2b$10$YFettERiAn3H7xyCgaSmhOAUK/xOZyrp/TBBfz9Ri/FTdT/ReFZQe",
+  "role": "user",
+  "carts": [
+    {
+      "book": {
+        "$oid": "65a3aeca9cd9b6e5b03a9ad8"
+      },
+      "quantity": 1,
+      "_id": {
+        "$oid": "65a68c7c03b48121286fa1b8"
+      }
+    }
+  ],
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "65a692a325219eaf57b827a1"
+  },
+  "email": "kimdong211@mail.com",
+  "userName": "kimdong16",
+  "password": "$2b$10$JMPhVMYBqQ6KOM6xt0GdHuAGZJDx151nU2bRGZ7sJK/K26XSajDQ.",
+  "role": "user",
+  "carts": [],
+  "__v": 0
+}]

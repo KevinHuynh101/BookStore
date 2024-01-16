@@ -1,0 +1,58 @@
+[{
+  "_id": {
+    "$oid": "65a3aeca9cd9b6e5b03a9ad8"
+  },
+  "name": "Dế mèn phiêu lưu ký phần 1 ",
+  "image": "/img/001.webp ",
+  "price": 50000,
+  "author": "Tô Hoài",
+  "order": 0,
+  "category_k": {
+    "$oid": "65a3a7859c8f641f7128b41c"
+  },
+  "__v": 0,
+  "content": "Sách nói về cuộc phiêu lưu đầy thú vị của dế mèn"
+},
+{
+  "_id": {
+    "$oid": "65a3aece9cd9b6e5b03a9adb"
+  },
+  "name": "Dế mèn phiêu lưu ký phan 2 ",
+  "image": "/img/001.webp ",
+  "price": 50000,
+  "author": "Tô Hoài",
+  "order": 0,
+  "category_k": {
+    "$oid": "65a3a7859c8f641f7128b41c"
+  },
+  "__v": 0,
+  "content": "Sách nói về cuộc phiêu lưu đầy thú vị của dế mèn"
+},
+{
+  "_id": {
+    "$oid": "65a54e195e7bbbfefe5254b4"
+  },
+  "name": "âm nhạc lớp 7  ",
+  "image": "/img/002.jpg  ",
+  "price": 30000,
+  "author": "không rõ",
+  "category_k": {
+    "$oid": "65a3a7909c8f641f7128b41f"
+  },
+  "__v": 0,
+  "content": "Sách âm nhạc  cho học sinh  lớp 7"
+},
+{
+  "_id": {
+    "$oid": "65a60b61fd2500fb2595fca1"
+  },
+  "name": " sách lớp 1",
+  "image": " /img/002.jpg",
+  "price": 1000000,
+  "author": "không rõ",
+  "content": "sach lop 1",
+  "category_k": {
+    "$oid": "65a3a7909c8f641f7128b41f"
+  },
+  "__v": 0
+}]
