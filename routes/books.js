@@ -76,7 +76,10 @@ router.post('/add',async function (req, res, next) {
   console.log(result);
   req.userID = result;
   var user = await modelUser.getOne(req.userID);
-    var book = await modelBook.getByName(req.body.name);
+  var book = await modelBook.getByName(req.body.name);
+  var role = user.role;
+  var DSRole = ['admin','publisher'];
+  if(DSRole.includes(role)){
     if (book) {
       responseData.responseReturn(res, 404, false, "book da ton tai");
     } else {
@@ -93,6 +96,9 @@ router.post('/add',async function (req, res, next) {
       // responseData.responseReturn(res, 200, true, newBook);
       res.redirect('/books/');
     }
+  }else{
+    responseData.responseReturn(res, 403, true,"ban khong du quyen");
+}
   });
 
 
@@ -132,6 +138,9 @@ router.put('/edit/:id', async function (req, res, next) {
   console.log(result);
   req.userID = result;
   var user = await modelUser.getOne(req.userID);
+  var role = user.role;
+  var DSRole = ['admin','publisher'];
+  if(DSRole.includes(role)){
   const book = {
     name: req.body.name,
     image: req.body.image,
@@ -151,6 +160,9 @@ router.put('/edit/:id', async function (req, res, next) {
     console.log(e);
     res.render('books/new', {book: book});
   }
+}else{
+  responseData.responseReturn(res, 403, true,"ban khong du quyen");
+}
 });
 
 router.delete('/delete/:id',async function (req, res, next) {//delete by Id
