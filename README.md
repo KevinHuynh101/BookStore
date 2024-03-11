@@ -16,6 +16,7 @@
 -   [JWT](https://www.npmjs.com/package/jsonwebtoken)
 -   [Validator.js](https://www.npmjs.com/package/validator)
 -   [EJS](https://ejs.co/#install)
+-   [Visual studio code ](https://code.visualstudio.com/download)
 <hr>
 <h2 align="center">Run Locally </h2>
 Clone the project
